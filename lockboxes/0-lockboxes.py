@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""This module defines a Square class."""
+
+
 def canUnlockAll(boxes):
     """
     Détermine si toutes les boîtes peuvent être ouvertes.
