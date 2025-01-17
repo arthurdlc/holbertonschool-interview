@@ -12,10 +12,10 @@
 */
 struct binary_trees_s
 {
-struct binary_trees_s *parent;
-struct binary_trees_s *left;
-struct binary_trees_s *right;
-int n;
+    struct binary_trees_s *parent;
+    struct binary_trees_s *left;
+    struct binary_trees_s *right;
+    int n;
 };
 
 typedef struct binary_trees_s binary_tree_t;
