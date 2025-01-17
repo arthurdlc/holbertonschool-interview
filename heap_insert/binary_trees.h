@@ -8,14 +8,14 @@
  * @n: Integer stored in the node
  * @parent: Pointer to the parent node
  * @left: Pointer to the left child node
- * @right: Pointer to the right child node
- */
+* @right: Pointer to the right child node
+*/
 struct binary_trees_s
 {
-	struct binary_trees_s *parent;
-	struct binary_trees_s *left;
-	struct binary_trees_s *right;
-	int n;
+struct binary_trees_s *parent;
+struct binary_trees_s *left;
+struct binary_trees_s *right;
+int n;
 };
 
 typedef struct binary_trees_s binary_tree_t;
