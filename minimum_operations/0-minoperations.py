@@ -4,6 +4,7 @@ This module provides a function to calculate the minimum number of operations
 needed to achieve exactly n 'H' characters in a text file.
 """
 
+
 def minOperations(n):
     """
     Calculate the minimum number of operations to get n H characters in a file.
