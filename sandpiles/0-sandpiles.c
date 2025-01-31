@@ -7,39 +7,39 @@
  */
 void print_grid_sandpile(int grid[3][3])
 {
-int i, j;
+	int i, j;
 
-printf("=\n");
-for (i = 0; i < 3; i++)
-{
-for (j = 0; j < 3; j++)
-{
-if (j)
-printf(" ");
-printf("%d", grid[i][j]);
-}
-printf("\n");
-}
+	printf("=\n");
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			if (j)
+				printf(" ");
+			printf("%d", grid[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 /**
  * is_stable - Checks if a sandpile is stable
  * @grid: The grid to check
- * Return: 1 if stable
+ * Return: 1 if stable, 0 otherwise
  */
 int is_stable(int grid[3][3])
 {
-int i, j;
+	int i, j;
 
-for (i = 0; i < 3; i++)
-{
-for (j = 0; j < 3; j++)
-{
-if (grid[i][j] > 3)
-return (0);
-}
-}
-return (1);
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			if (grid[i][j] > 3)
+				return (0);
+		}
+	}
+	return (1);
 }
 
 /**
@@ -48,35 +48,46 @@ return (1);
  */
 void toppling_round(int grid[3][3])
 {
-int temp[3][3] = {0};
-int i, j;
+	int temp[3][3];
+	int i, j;
 
-for (i = 0; i < 3; i++)
-{
-for (j = 0; j < 3; j++)
-{
-if (grid[i][j] > 3)
-{
-temp[i][j] -= 4;
-if (i > 0)
-temp[i - 1][j] += 1;
-if (i < 2)
-temp[i + 1][j] += 1;
-if (j > 0)
-temp[i][j - 1] += 1;
-if (j < 2)
-temp[i][j + 1] += 1;
-}
-}
-}
+	/* Initialize temp grid with 0 */
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			temp[i][j] = 0;
+		}
+	}
 
-for (i = 0; i < 3; i++)
-{
-for (j = 0; j < 3; j++)
-{
-grid[i][j] += temp[i][j];
-}
-}
+	/* Compute changes in temp */
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			if (grid[i][j] > 3)
+			{
+				temp[i][j] -= 4;
+				if (i > 0)
+					temp[i - 1][j] += 1;
+				if (i < 2)
+					temp[i + 1][j] += 1;
+				if (j > 0)
+					temp[i][j - 1] += 1;
+				if (j < 2)
+					temp[i][j + 1] += 1;
+			}
+		}
+	}
+
+	/* Apply changes to grid */
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			grid[i][j] += temp[i][j];
+		}
+	}
 }
 
 /**
@@ -86,19 +97,21 @@ grid[i][j] += temp[i][j];
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-int i, j;
+	int i, j;
 
-for (i = 0; i < 3; i++)
-{
-for (j = 0; j < 3; j++)
-{
-grid1[i][j] += grid2[i][j];
-}
-}
+	/* Add grid2 to grid1 */
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			grid1[i][j] += grid2[i][j];
+		}
+	}
 
-while (!is_stable(grid1))
-{
-print_grid_sandpile(grid1);
-toppling_round(grid1);
-}
+	/* Stabilize the grid */
+	while (!is_stable(grid1))
+	{
+		print_grid_sandpile(grid1);
+		toppling_round(grid1);
+	}
 }
