@@ -5,7 +5,6 @@ import re
 from collections import defaultdict
 
 def print_stats(total_size, status_counts):
-    """Affiche la taille totale des fichiers et le nombre de codes de statut."""
     print("File size: {}".format(total_size))
     for status_code in sorted(status_counts.keys()):
         print("{}: {}".format(status_code, status_counts[status_code]))
