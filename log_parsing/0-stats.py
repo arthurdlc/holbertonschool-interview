@@ -2,6 +2,11 @@
 import sys
 import signal
 
+"""
+This script reads log entries from stdin, extracts status codes and file sizes,
+and prints statistics every 10 lines or upon receiving a keyboard interrupt (CTRL + C).
+"""
+
 # Dictionary to store count of status codes
 status_counts = {}
 # Total file size counter
@@ -36,7 +41,6 @@ try:
             status_code = int(parts[-2])
             file_size = int(parts[-1])
             
-            global total_size, line_count
             total_size += file_size
             line_count += 1
             
