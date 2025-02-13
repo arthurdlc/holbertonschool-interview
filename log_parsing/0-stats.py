@@ -1,42 +1,52 @@
 #!/usr/bin/python3
-
 import sys
-import re
-from collections import defaultdict
+import signal
 
-def print_stats(total_size, status_counts):
-    print("File size: {}".format(total_size))
-    for status_code in sorted(status_counts.keys()):
-        print("{}: {}".format(status_code, status_counts[status_code]))
+# Dictionary to store count of status codes
+status_counts = {}
+# Total file size counter
+total_size = 0
+# Number of lines processed
+line_count = 0
 
-# Initialisation des variables
-total_size = 0  # Taille totale des fichiers
-status_counts = defaultdict(int)  # Compteur de codes de statut
-line_count = 0  # Nombre de lignes traitées
-valid_status_codes = {"200", "301", "400", "401", "403", "404", "405", "500"}
+# Allowed status codes
+valid_status_codes = {200, 301, 400, 401, 403, 404, 405, 500}
+
+def print_stats():
+    """Prints the accumulated metrics."""
+    print(f"File size: {total_size}")
+    for code in sorted(status_counts.keys()):
+        print(f"{code}: {status_counts[code]}")
+
+def signal_handler(sig, frame):
+    """Handles keyboard interrupt (CTRL + C) by printing stats before exiting."""
+    print_stats()
+    sys.exit(0)
+
+# Attach signal handler for CTRL + C
+signal.signal(signal.SIGINT, signal_handler)
 
 try:
-    # Lecture de l'entrée standard ligne par ligne
     for line in sys.stdin:
-        match = re.match(
-            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[[^\]]+\] "GET /projects/260 HTTP/1.1" (\d+) (\d+)',
-            line
-        )
-        if match:
-            status_code, file_size = match.groups()
-            total_size += int(file_size)
+        parts = line.split()
+        if len(parts) < 9:
+            continue  # Ignore malformed lines
+        
+        try:
+            status_code = int(parts[-2])
+            file_size = int(parts[-1])
+            
+            global total_size, line_count
+            total_size += file_size
             line_count += 1
-
+            
             if status_code in valid_status_codes:
-                status_counts[status_code] += 1
-
-            # Affichage des statistiques toutes les 10 lignes
+                status_counts[status_code] = status_counts.get(status_code, 0) + 1
+            
             if line_count % 10 == 0:
-                print_stats(total_size, status_counts)
-
+                print_stats()
+        except ValueError:
+            continue  # Ignore lines where status code or file size is not an integer
 except KeyboardInterrupt:
-    pass  # On ne fait rien et on continue à afficher les stats
-
-finally:
-    # Affichage des statistiques à la fin de l'exécution
-    print_stats(total_size, status_counts)
+    print_stats()
+    sys.exit(0)
