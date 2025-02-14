@@ -15,10 +15,10 @@ def print_metrics():
     """
     Prints the computed metrics to stdout.
     """
-    print(f"File size: {total_file_size}")  # File size computed from the lines processed
+    print(f"File size: {total_file_size}")
     for status_code in sorted(valid_status_codes):
-        if status_code_count[status_code] > 0:  # Print only if the status code count is greater than 0
-            print(f"{status_code}: {status_code_count[status_code]}")  # Print count of each status code
+        if status_code_count[status_code] > 0: 
+            print(f"{status_code}: {status_code_count[status_code]}")  
 
 
 if __name__ == "__main__": 
