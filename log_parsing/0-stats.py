@@ -15,13 +15,13 @@ def print_metrics():
     """
     Prints the computed metrics to stdout.
     """
-    print(f"File size: {total_file_size}")
-    for status_code in sorted(valid_status_codes):
-        if status_code_count[status_code] > 0:
-            print(f"{status_code}: {status_code_count[status_code]}")
+    print(f"File size: {total_file_size}") # ici on affiche la taille des fichier qui on ete incrementé apres dans le code ci dessous
+    for status_code in sorted(valid_status_codes): # on parcours les codes d'etats
+        if status_code_count[status_code] > 0: # si le code d'etat n'est pas egale a 0
+            print(f"{status_code}: {status_code_count[status_code]}") # on le print
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     try:
         has_printed_final = False
 
