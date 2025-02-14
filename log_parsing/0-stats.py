@@ -17,11 +17,11 @@ def print_metrics():
     """
     print(f"File size: {total_file_size}")
     for status_code in sorted(valid_status_codes):
-        if status_code_count[status_code] > 0: 
-            print(f"{status_code}: {status_code_count[status_code]}")  
+        if status_code_count[status_code] > 0:
+            print(f"{status_code}: {status_code_count[status_code]}")
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     try:
         has_printed_final = False
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
                     total_file_size += file_size
                 except ValueError:
                     continue
-                
+
                 if status_code in status_code_count:
                     status_code_count[status_code] += 1
 
