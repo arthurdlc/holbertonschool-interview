@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Continuously reads input lines and processes them to compute metrics:
+Continuously reads input lines and processes them to compute metrics.
 """
 import sys
 
@@ -15,10 +15,10 @@ def print_metrics():
     """
     Prints the computed metrics to stdout.
     """
-    print(f"File size: {total_file_size}") 
-    for status_code in sorted(valid_status_codes): # on parcours les codes d'etats
-        if status_code_count[status_code] > 0: # si le code d'etat n'est pas egale a 0
-            print(f"{status_code}: {status_code_count[status_code]}") # on le print
+    print(f"File size: {total_file_size}")  # File size computed from the lines processed
+    for status_code in sorted(valid_status_codes):
+        if status_code_count[status_code] > 0:  # Print only if the status code count is greater than 0
+            print(f"{status_code}: {status_code_count[status_code]}")  # Print count of each status code
 
 
 if __name__ == "__main__": 
@@ -35,6 +35,7 @@ if __name__ == "__main__":
                     total_file_size += file_size
                 except ValueError:
                     continue
+                
                 if status_code in status_code_count:
                     status_code_count[status_code] += 1
 
