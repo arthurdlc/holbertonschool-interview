@@ -1,4 +1,6 @@
 #include "menger.h"
+#include <stdio.h>
+#include <math.h>
 
 /**
  * is_hole - Vérifie si une position donnée doit être un "trou"
