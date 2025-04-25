@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""
+" demo en sah
+"""
 def rain(walls):
     if not walls or len(walls) < 3:
         return 0
