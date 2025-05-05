@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.twig": "twig",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "stdio.h": "c"
     }
 }
