@@ -8,7 +8,8 @@ def count_words(subreddit, word_list, word_count={}, after=None):
     if not word_list:
         return
 
-    # Normalize word_list to lowercase and remove duplicates while counting duplicates
+    # Normalize word_list to lowercase and remove 
+    # duplicates while counting duplicates
     if not word_count:
         for word in word_list:
             lower = word.lower()
