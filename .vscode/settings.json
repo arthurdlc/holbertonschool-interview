@@ -2,6 +2,7 @@
     "files.associations": {
         "*.twig": "twig",
         "cstdlib": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "binary_trees.h": "c"
     }
 }
