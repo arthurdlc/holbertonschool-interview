@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * find_listint_loop - Finds the loop 
+ * find_listint_loop - Finds the loop
  * in a linked list using Floyd’s algorithm.
  * @head: Pointer to the head of the list.
  *
