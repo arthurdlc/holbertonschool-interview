@@ -1,26 +1,25 @@
 #include "holberton.h"
 
+/**
+ * wildcmp - Compare two strings and allow for wildcard * in s2
+ * @s1: First string
+ * @s2: Second string, can contain wildcard *
+ *
+ * Return: 1 if considered identical, 0 otherwise
+ */
 int wildcmp(char *s1, char *s2)
 {
-    // If both strings reach the end, return 1 (they are identical)
-    if (*s1 == '\0' && *s2 == '\0')
-        return 1;
+if (*s1 == '\0' && *s2 == '\0')
+return 1;
 
-    // If s2 is empty but s1 is not, return 0 (they can't match)
-    if (*s1 == '\0' && *s2 == '*')
-        return wildcmp(s1, s2 + 1); // Skip the '*' in s2 and continue
+if (*s2 == '*')
+{
+// Try skipping the '*', or using it to match one or more characters
+return wildcmp(s1, s2 + 1) || (*s1 && wildcmp(s1 + 1, s2));
+}
 
-    // If s2 starts with '*' (wildcard) we have two options:
-    if (*s2 == '*')
-    {
-        // Try skipping '*' in s2 or matching s1 to s2 after skipping '*'
-        return wildcmp(s1, s2 + 1) || (*s1 != '\0' && wildcmp(s1 + 1, s2));
-    }
+if (*s1 == *s2)
+return wildcmp(s1 + 1, s2 + 1);
 
-    // If current characters match, move to the next characters
-    if (*s1 == *s2)
-        return wildcmp(s1 + 1, s2 + 1);
-
-    // If the characters don't match, return 0
-    return 0;
+return 0;
 }
