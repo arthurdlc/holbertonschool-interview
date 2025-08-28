@@ -3,6 +3,7 @@
 
 """Prime Game - Maria and Ben"""
 
+
 def isWinner(x, nums):
     """Determine the winner of the Prime Game"""
     if x < 1 or not nums:
